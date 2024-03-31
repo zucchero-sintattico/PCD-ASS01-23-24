@@ -2,6 +2,7 @@ package pcd.ass01.passiveComponent.agent;
 
 import pcd.ass01.passiveComponent.agent.action.Action;
 import pcd.ass01.passiveComponent.agent.percept.CarPercept;
+import pcd.ass01.passiveComponent.agent.task.SerialTask;
 import pcd.ass01.passiveComponent.simulation.SimulationComponent;
 import pcd.ass01.simtrafficbase.AbstractEnvironment;
 import pcd.ass01.simtrafficbase.Road;
@@ -15,7 +16,7 @@ import java.util.Random;
  * Base  class for defining types of agents taking part to the simulation
  * 
  */
-public abstract class  AbstractAgent implements Runnable, SimulationComponent {
+public  abstract class  AbstractAgent implements Runnable, SimulationComponent, Agent {
 	
 	private final String myId;
 	private AbstractEnvironment env;
@@ -70,7 +71,7 @@ public abstract class  AbstractAgent implements Runnable, SimulationComponent {
 
 	}
 
-	public void doAction() {
+	private void doAction() {
 		AbstractEnvironment env = this.getEnv();
 		env.doAction(getAgentId(), selectedAction);
 	}
@@ -79,7 +80,7 @@ public abstract class  AbstractAgent implements Runnable, SimulationComponent {
 	 *
 	 * Base method to define the behaviour strategy of the car
 	 *
-	 * @param dt
+	 * @param
 	 */
 	protected  abstract void decide();
 
@@ -141,5 +142,10 @@ public abstract class  AbstractAgent implements Runnable, SimulationComponent {
 	@Override
 	public void setup(int dt) {
 		this.dt = dt;
+	}
+
+	@Override
+	public SerialTask getSerialTask() {
+		return this::doAction;
 	}
 }

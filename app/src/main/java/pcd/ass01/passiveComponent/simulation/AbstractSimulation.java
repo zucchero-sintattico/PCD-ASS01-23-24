@@ -138,7 +138,7 @@ public abstract class AbstractSimulation implements Simulation{
 		System.out.println("Step: " + nSteps);
 		currentWallTime = System.currentTimeMillis();
 		for (var a: agents) {
-			a.doAction();
+			a.getSerialTask().run();
 		}
 		t += dt;
 
