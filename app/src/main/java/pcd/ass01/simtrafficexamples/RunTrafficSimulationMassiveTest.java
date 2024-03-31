@@ -1,5 +1,7 @@
 package pcd.ass01.simtrafficexamples;
 
+import model.SimulationRunner;
+
 import java.io.FileWriter;
 import java.util.List;
 
@@ -24,7 +26,13 @@ public class RunTrafficSimulationMassiveTest {
 
 			simulation.addSimulationListener(stat);
 
-			simulation.run();
+			Thread t = new SimulationRunner(simulation);
+			t.start();
+			try {
+				t.join();
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
 
 			long d = simulation.getSimulationDuration();
 			log("Completed in " + d + " ms - average time per step: " + simulation.getAverageTimePerCycle() + " ms");
