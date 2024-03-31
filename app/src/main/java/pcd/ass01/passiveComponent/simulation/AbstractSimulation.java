@@ -177,6 +177,8 @@ public abstract class AbstractSimulation implements Simulation{
 	}
 
 	protected void addAgent(AbstractAgent agent) {
+		//todo setup timing must be called before adding agents
+		agent.setup(dt);
 		agents.add(agent);
 	}
 	

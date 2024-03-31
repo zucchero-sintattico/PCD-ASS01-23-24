@@ -1,8 +1,8 @@
 package pcd.ass01.passiveComponent.simulation.examples;
 
+import pcd.ass01.passiveComponent.agent.AbstractAgent;
 import pcd.ass01.passiveComponent.simulation.AbstractSimulation;
-import pcd.ass01.simtrafficbase.CarAgent;
-import pcd.ass01.simtrafficbase.CarAgentBasic;
+import pcd.ass01.passiveComponent.agent.agentImpl.base.CarAgentBasic;
 import pcd.ass01.simtrafficbase.P2d;
 import pcd.ass01.simtrafficbase.Road;
 import pcd.ass01.simtrafficbase.RoadsEnv;
@@ -31,8 +31,8 @@ public class TrafficSimulationSingleRoadMassiveNumberOfCars extends AbstractSimu
 			double carAcceleration = 1; //  + gen.nextDouble()/2;
 			double carDeceleration = 0.3; //  + gen.nextDouble()/2;
 			double carMaxSpeed = 7; // 4 + gen.nextDouble();
-						
-			CarAgent car = new CarAgentBasic(carId, env, 
+
+			AbstractAgent car = new CarAgentBasic(carId, env,
 									road,
 									initialPos, 
 									carAcceleration, 

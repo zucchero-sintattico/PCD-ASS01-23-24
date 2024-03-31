@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 import pcd.ass01.passiveComponent.agent.AbstractAgent;
 import pcd.ass01.simtrafficbase.AbstractEnvironment;
-import pcd.ass01.simtrafficbase.CarAgentInfo;
+import pcd.ass01.passiveComponent.agent.CarAgentInfo;
 import pcd.ass01.simtrafficbase.Road;
 import pcd.ass01.simtrafficbase.RoadsEnv;
 import pcd.ass01.simtrafficbase.TrafficLight;

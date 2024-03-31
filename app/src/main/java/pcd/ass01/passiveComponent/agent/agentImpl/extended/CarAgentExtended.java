@@ -1,6 +1,11 @@
-package pcd.ass01.simtrafficbase;
+package pcd.ass01.passiveComponent.agent.agentImpl.extended;
 
+import pcd.ass01.passiveComponent.agent.AbstractAgent;
 import pcd.ass01.passiveComponent.agent.action.MoveForward;
+import pcd.ass01.passiveComponent.agent.CarAgentInfo;
+import pcd.ass01.simtrafficbase.Road;
+import pcd.ass01.simtrafficbase.RoadsEnv;
+import pcd.ass01.simtrafficbase.TrafficLightInfo;
 
 import java.util.Optional;
 
@@ -12,7 +17,7 @@ import java.util.Optional;
  * If there are no cars or the car is far, accelerate up to a constant speed
  * 
  */
-public class CarAgentExtended extends CarAgent {
+public class CarAgentExtended extends AbstractAgent {
 
 	private static final int CAR_NEAR_DIST = 15;
 	private static final int CAR_FAR_ENOUGH_DIST = 20;
@@ -29,24 +34,20 @@ public class CarAgentExtended extends CarAgent {
 	
 	private int waitingTime;
 	
-	public CarAgentExtended(String id, RoadsEnv env, Road road, 
-					double initialPos, 
-					double acc, 
-					double dec,
-					double vmax) {
+	public CarAgentExtended(String id, RoadsEnv env, Road road,
+							double initialPos,
+							double acc,
+							double dec,
+							double vmax) {
 		super(id, env, road, initialPos, acc, dec, vmax);
 		state = CarAgentState.STOPPED;
 	}
 
-	public CarAgentExtended(String id, RoadsEnv env, Road road,
-			int seed) {
-		super(id, env, road, seed);
-		state = CarAgentState.STOPPED;
-	}
+
 	
 	
 	@Override
-	public void decide(int dt) {
+	public void decide() {
 		switch (state) {
 		case CarAgentState.STOPPED:
 			if (!detectedNearCar()) {

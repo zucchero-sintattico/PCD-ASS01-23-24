@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import pcd.ass01.passiveComponent.agent.AbstractAgent;
+import pcd.ass01.passiveComponent.agent.CarAgentInfo;
 import pcd.ass01.passiveComponent.agent.action.MoveForward;
 import pcd.ass01.passiveComponent.agent.percept.CarPercept;
 import pcd.ass01.passiveComponent.agent.action.Action;
@@ -30,12 +32,12 @@ public class RoadsEnv extends AbstractEnvironment {
 	private int nW;
 	boolean timeToWrite;
 
-	private synchronized void _senseEntrance(CarAgent agent) throws InterruptedException {
+	private synchronized void _senseEntrance(AbstractAgent agent) throws InterruptedException {
 		while(timeToWrite){
 			wait();
 		}
 	}
-	private synchronized void _senseExit(CarAgent agent) throws InterruptedException {
+	private synchronized void _senseExit(AbstractAgent agent) throws InterruptedException {
 		nR++;
 		if(nR == registeredCars.size()){
 			timeToWrite = true;
@@ -44,12 +46,12 @@ public class RoadsEnv extends AbstractEnvironment {
 		}
 	}
 
-	private synchronized void _actEntrance(CarAgent agent) throws InterruptedException {
+	private synchronized void _actEntrance(AbstractAgent agent) throws InterruptedException {
 		while(!timeToWrite){
 			wait();
 		}
 	}
-	private synchronized void _actExit(CarAgent agent) throws InterruptedException {
+	private synchronized void _actExit(AbstractAgent agent) throws InterruptedException {
 		nW++;
 		if(nW == registeredCars.size()){
 			timeToWrite = false;
@@ -78,7 +80,7 @@ public class RoadsEnv extends AbstractEnvironment {
 		}
 	}
 	
-	public void registerNewCar(CarAgent car, Road road, double pos) {
+	public void registerNewCar(AbstractAgent car, Road road, double pos) {
 		registeredCars.put(car.getAgentId(), new CarAgentInfo(car, road, pos));
 	}
 

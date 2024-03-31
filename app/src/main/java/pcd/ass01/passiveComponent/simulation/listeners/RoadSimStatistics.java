@@ -35,7 +35,7 @@ public class RoadSimStatistics implements SimulationListener {
 		maxSpeed = -1;
 		minSpeed = Double.MAX_VALUE;
 		for (var agent: agents) {
-			CarAgent car = (CarAgent) agent;
+			AbstractAgent car = (AbstractAgent) agent;
 			double currSpeed = car.getCurrentSpeed();
 			avSpeed += currSpeed;			
 			if (currSpeed > maxSpeed) {
