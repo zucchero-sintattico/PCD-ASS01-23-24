@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 import pcd.ass01.passiveComponent.simulation.agent.action.MoveForward;
+import pcd.ass01.passiveComponent.simulation.agent.perception.CarPercept;
 import pcd.ass01.simengineseq.AbstractEnvironment;
 import pcd.ass01.passiveComponent.simulation.agent.action.Action;
-import pcd.ass01.simengineseq.Percept;
+import pcd.ass01.passiveComponent.simulation.agent.perception.Percept;
 
 public class RoadsEnv extends AbstractEnvironment {
 		

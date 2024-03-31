@@ -98,22 +98,22 @@ public class CarAgentBasic extends CarAgent {
 	/* aux methods */
 		
 	private boolean detectedNearCar() {
-		Optional<CarAgentInfo> car = currentPercept.nearestCarInFront();
+		Optional<CarAgentInfo> car = currentPercept.getNearestCarInFront();
 		if (car.isEmpty()) {
 			return false;
 		} else {
-			double dist = car.get().getPos() - currentPercept.roadPos();
+			double dist = car.get().getPos() - currentPercept.getRoadPos();
 			return dist < CAR_NEAR_DIST;
 		}
 	}
 	
 
 	private boolean carFarEnough() {
-		Optional<CarAgentInfo> car = currentPercept.nearestCarInFront();
+		Optional<CarAgentInfo> car = currentPercept.getNearestCarInFront();
 		if (car.isEmpty()) {
 			return true;
 		} else {
-			double dist = car.get().getPos() - currentPercept.roadPos();
+			double dist = car.get().getPos() - currentPercept.getRoadPos();
 			return dist > CAR_FAR_ENOUGH_DIST;
 		}
 	}

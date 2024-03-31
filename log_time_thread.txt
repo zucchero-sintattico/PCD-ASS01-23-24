@@ -62,3 +62,8 @@
 1	33656
 
 --------- refactor agent action
+1	34249
+1	33842
+1	33881
+
+--------- refactor agent percept

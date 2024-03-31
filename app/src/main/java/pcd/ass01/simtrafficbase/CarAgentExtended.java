@@ -109,37 +109,37 @@ public class CarAgentExtended extends CarAgent {
 	}
 		
 	private boolean detectedNearCar() {
-		Optional<CarAgentInfo> car = currentPercept.nearestCarInFront();
+		Optional<CarAgentInfo> car = currentPercept.getNearestCarInFront();
 		if (car.isEmpty()) {
 			return false;
 		} else {
-			double dist = car.get().getPos() - currentPercept.roadPos();
+			double dist = car.get().getPos() - currentPercept.getRoadPos();
 			return dist < CAR_NEAR_DIST;
 		}
 	}
 	
 	private boolean detectedRedOrOrgangeSemNear() {
-		Optional<TrafficLightInfo> sem = currentPercept.nearestSem();
+		Optional<TrafficLightInfo> sem = currentPercept.getNearestSem();
 		if (sem.isEmpty() || sem.get().sem().isGreen()) {
 			return false;
 		} else {
-			double dist = sem.get().roadPos() - currentPercept.roadPos();
+			double dist = sem.get().roadPos() - currentPercept.getRoadPos();
 			return dist > 0 && dist < SEM_NEAR_DIST;
 		}
 	}
 
 
 	private boolean detectedGreenSem() {
-		Optional<TrafficLightInfo> sem = currentPercept.nearestSem();
+		Optional<TrafficLightInfo> sem = currentPercept.getNearestSem();
 		return (!sem.isEmpty() && sem.get().sem().isGreen());
 	}
 	
 	private boolean carFarEnough() {
-		Optional<CarAgentInfo> car = currentPercept.nearestCarInFront();
+		Optional<CarAgentInfo> car = currentPercept.getNearestCarInFront();
 		if (car.isEmpty()) {
 			return true;
 		} else {
-			double dist = car.get().getPos() - currentPercept.roadPos();
+			double dist = car.get().getPos() - currentPercept.getRoadPos();
 			return dist > CAR_FAR_ENOUGH_DIST;
 		}
 	}

@@ -1,6 +1,7 @@
 package pcd.ass01.simengineseq;
 
 import pcd.ass01.passiveComponent.simulation.agent.action.Action;
+import pcd.ass01.passiveComponent.simulation.agent.perception.Percept;
 
 import java.util.Optional;
 
