@@ -1,6 +1,6 @@
-package pcd.ass01.simtrafficexamples;
+package pcd.ass01.passiveComponent.simulation.examples;
 
-import pcd.ass01.simengineseq.AbstractSimulation;
+import pcd.ass01.passiveComponent.simulation.AbstractSimulation;
 import pcd.ass01.simtrafficbase.CarAgent;
 import pcd.ass01.simtrafficbase.CarAgentBasic;
 import pcd.ass01.simtrafficbase.P2d;

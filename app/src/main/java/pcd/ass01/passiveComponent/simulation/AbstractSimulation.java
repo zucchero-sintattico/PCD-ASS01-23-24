@@ -1,17 +1,19 @@
-package pcd.ass01.simengineseq;
+package pcd.ass01.passiveComponent.simulation;
 
 import model.*;
+import pcd.ass01.simengineseq.AbstractAgent;
+import pcd.ass01.simengineseq.AbstractEnvironment;
+import pcd.ass01.passiveComponent.simulation.listeners.SimulationListener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Semaphore;
 
 /**
  * Base class for defining concrete simulations
  *  
  */
-public abstract class AbstractSimulation {
+public abstract class AbstractSimulation implements Simulation{
 
 	/* environment of the simulation */
 	private AbstractEnvironment env;
@@ -96,7 +98,7 @@ public abstract class AbstractSimulation {
 	 * 
 	 * @param
 	 */
-	public void run() {
+	public void doStep() {
 
 		
 		if (nSteps < numSteps) {
@@ -163,7 +165,7 @@ public abstract class AbstractSimulation {
 		this.t0 = t0;
 	}
 	
-	protected void syncWithTime(int nCyclesPerSec) {
+	public void syncWithTime(int nCyclesPerSec) {
 		this.toBeInSyncWithWallTime = true;
 		this.nStepsPerSec = nCyclesPerSec;
 	}

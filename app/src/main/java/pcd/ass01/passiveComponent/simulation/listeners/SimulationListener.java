@@ -1,4 +1,7 @@
-package pcd.ass01.simengineseq;
+package pcd.ass01.passiveComponent.simulation.listeners;
+
+import pcd.ass01.simengineseq.AbstractAgent;
+import pcd.ass01.simengineseq.AbstractEnvironment;
 
 import java.util.List;
 

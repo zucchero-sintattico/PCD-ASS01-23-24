@@ -1,7 +1,6 @@
 package model;
 
-import pcd.ass01.simengineseq.AbstractSimulation;
-import pcd.ass01ridesign.passiveComponent.simulation.Simulation;
+import pcd.ass01.passiveComponent.simulation.AbstractSimulation;
 
 public class SimulationRunner extends Thread {
 
@@ -17,7 +16,7 @@ public class SimulationRunner extends Thread {
     public void run() {
         state.startSimulation();
         while (state.isSimulationRunning()) {
-            simulation.run();
+            simulation.doStep();
         }
     }
 

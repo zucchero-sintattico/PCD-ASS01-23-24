@@ -1,4 +1,4 @@
-package pcd.ass01.simtrafficexamples;
+package pcd.ass01.passiveComponent.simulation.listeners;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 import pcd.ass01.simengineseq.AbstractAgent;
 import pcd.ass01.simengineseq.AbstractEnvironment;
-import pcd.ass01.simengineseq.SimulationListener;
+import pcd.ass01.passiveComponent.simulation.listeners.SimulationListener;
 import pcd.ass01.simtrafficbase.CarAgentInfo;
 import pcd.ass01.simtrafficbase.Road;
 import pcd.ass01.simtrafficbase.RoadsEnv;
