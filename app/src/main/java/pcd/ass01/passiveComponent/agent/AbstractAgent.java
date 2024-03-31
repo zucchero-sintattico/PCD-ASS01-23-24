@@ -2,6 +2,7 @@ package pcd.ass01.passiveComponent.agent;
 
 import pcd.ass01.passiveComponent.agent.action.Action;
 import pcd.ass01.passiveComponent.agent.percept.CarPercept;
+import pcd.ass01.passiveComponent.agent.task.ParallelTask;
 import pcd.ass01.passiveComponent.agent.task.SerialTask;
 import pcd.ass01.passiveComponent.simulation.SimulationComponent;
 import pcd.ass01.simtrafficbase.AbstractEnvironment;
@@ -16,7 +17,7 @@ import java.util.Random;
  * Base  class for defining types of agents taking part to the simulation
  * 
  */
-public  abstract class  AbstractAgent implements Runnable, SimulationComponent, Agent {
+public  abstract class  AbstractAgent implements SimulationComponent, Agent {
 	
 	private final String myId;
 	private AbstractEnvironment env;
@@ -54,7 +55,7 @@ public  abstract class  AbstractAgent implements Runnable, SimulationComponent, 
 	 * Basic behaviour of a car agent structured into a sense/decide/act structure
 	 *
 	 */
-	public void sensAndDecide() {
+	private void sensAndDecide() {
 
 		/* sense */
 
@@ -133,10 +134,7 @@ public  abstract class  AbstractAgent implements Runnable, SimulationComponent, 
 		return this.env;
 	}
 
-	@Override
-	public void run() {
-		sensAndDecide();
-	}
+	
 
 
 	@Override
@@ -147,5 +145,10 @@ public  abstract class  AbstractAgent implements Runnable, SimulationComponent, 
 	@Override
 	public SerialTask getSerialTask() {
 		return this::doAction;
+	}
+
+	@Override
+	public ParallelTask getParallelTask() {
+		return this::sensAndDecide;
 	}
 }

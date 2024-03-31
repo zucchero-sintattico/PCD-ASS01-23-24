@@ -88,3 +88,13 @@
 1	33191
 
 ----------- add SerialAction wrapping doAction
+1	35316
+1	34644
+1	33492
+1	47440
+1	47049
+1	35885
+1	33552
+1	33350
+
+----------- add ParallelAction wrapping SenseAndDecide

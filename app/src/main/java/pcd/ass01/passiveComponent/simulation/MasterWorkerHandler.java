@@ -17,7 +17,10 @@ public class MasterWorkerHandler {
 
     public MasterWorkerHandler(int numOfThread, List<AbstractAgent> listOFAgent, int numOfStep, Barrier barrier){
 
-        this.listOFAgent = new ArrayList<>(listOFAgent);
+        this.listOFAgent = new ArrayList<>();
+        for(AbstractAgent agent : listOFAgent){
+            this.listOFAgent.add(agent.getParallelTask());
+        }
 
         int size = listOFAgent.size();
         int split = size/numOfThread;
