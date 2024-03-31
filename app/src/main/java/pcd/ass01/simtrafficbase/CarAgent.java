@@ -2,8 +2,8 @@ package pcd.ass01.simtrafficbase;
 
 import java.util.Optional;
 import java.util.Random;
-import java.util.concurrent.Semaphore;
 
+import pcd.ass01.passiveComponent.simulation.agent.action.Action;
 import pcd.ass01.simengineseq.*;
 
 /**

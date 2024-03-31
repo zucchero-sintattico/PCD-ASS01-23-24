@@ -5,8 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
+import pcd.ass01.passiveComponent.simulation.agent.action.MoveForward;
 import pcd.ass01.simengineseq.AbstractEnvironment;
-import pcd.ass01.simengineseq.Action;
+import pcd.ass01.passiveComponent.simulation.agent.action.Action;
 import pcd.ass01.simengineseq.Percept;
 
 public class RoadsEnv extends AbstractEnvironment {
@@ -158,11 +159,11 @@ public class RoadsEnv extends AbstractEnvironment {
 
 			if (!nearestCar.isEmpty()) {
 				double dist = nearestCar.get().getPos() - info.getPos();
-				if (dist > mv.distance() + MIN_DIST_ALLOWED) {
-					info.updatePos(info.getPos() + mv.distance());
+				if (dist > mv.getDistance() + MIN_DIST_ALLOWED) {
+					info.updatePos(info.getPos() + mv.getDistance());
 				}
 			} else {
-					info.updatePos(info.getPos() + mv.distance());
+					info.updatePos(info.getPos() + mv.getDistance());
 			}
 
 					if (info.getPos() > road.getLen()) {
