@@ -44,17 +44,7 @@ public abstract class AbstractCarAgent implements Agent, Car{
         this.environment.registerNewCar(this);
     }
 
-    public AbstractCarAgent(String agentID, Environment environment, Road road, double initialPosition, int seed) {
-        Random gen = new Random(seed);
-        this.agentID = agentID;
-        this.acceleration = 1 + gen.nextDouble(0,1);
-        this.deceleration = 0.3 + gen.nextDouble(0,1);
-        this.maxSpeed = 4 + gen.nextDouble(1,10);
-        this.environment = environment;
-        this.road = road;
-        this.position = initialPosition;
-        this.environment.registerNewCar(this);
-    }
+
 
     protected abstract void decide();
 

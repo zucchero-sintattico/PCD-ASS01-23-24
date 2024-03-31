@@ -16,20 +16,17 @@ public class BaseCarAgent extends AbstractCarAgent {
         super(agentID, environment, road, initialPosition, acceleration, deceleration, maxSpeed);
     }
 
-    public BaseCarAgent(String agentID, Environment environment, Road road, double initialPosition, int seed) {
-        super(agentID, environment, road, initialPosition,  seed);
-    }
 
     @Override
     protected void decide() {
 
         switch (state) {
-            case BaseCarAgentState.STOPPED:
+            case STOPPED:
                 if (!detectedNearCar()) {
                     state = BaseCarAgentState.ACCELERATING;
                 }
                 break;
-            case BaseCarAgentState.ACCELERATING:
+            case ACCELERATING:
                 if (detectedNearCar()) {
                     state = BaseCarAgentState.DECELERATING_BECAUSE_OF_A_CAR;
                 } else {
@@ -39,12 +36,12 @@ public class BaseCarAgent extends AbstractCarAgent {
                     }
                 }
                 break;
-            case BaseCarAgentState.MOVING_CONSTANT_SPEED:
+            case MOVING_CONSTANT_SPEED:
                 if (detectedNearCar()) {
                     state = BaseCarAgentState.DECELERATING_BECAUSE_OF_A_CAR;
                 }
                 break;
-            case BaseCarAgentState.DECELERATING_BECAUSE_OF_A_CAR:
+            case DECELERATING_BECAUSE_OF_A_CAR:
                 currentSpeed -= deceleration * stepSize;
                 if (currentSpeed <= 0) {
                     state = BaseCarAgentState.STOPPED;
@@ -53,7 +50,7 @@ public class BaseCarAgent extends AbstractCarAgent {
                     waitingTime = 0;
                 }
                 break;
-            case BaseCarAgentState.WAIT_A_BIT:
+            case WAIT_A_BIT:
                 waitingTime += stepSize;
                 if (waitingTime > MAX_WAITING_TIME) {
                     state = BaseCarAgentState.ACCELERATING;
@@ -69,7 +66,7 @@ public class BaseCarAgent extends AbstractCarAgent {
 
     private boolean detectedNearCar() {
         Optional<AbstractCarAgent> car = currentPerception.getNearestCarInFront();
-        if (car.isEmpty()) {
+        if (!car.isPresent()) {
             return false;
         } else {
             double dist = car.get().getPosition() - currentPerception.getRoadPos();
@@ -80,7 +77,7 @@ public class BaseCarAgent extends AbstractCarAgent {
 
     private boolean carFarEnough() {
         Optional<AbstractCarAgent> car = currentPerception.getNearestCarInFront();
-        if (car.isEmpty()) {
+        if (!car.isPresent()) {
             return true;
         } else {
             double dist = car.get().getPosition() - currentPerception.getRoadPos();

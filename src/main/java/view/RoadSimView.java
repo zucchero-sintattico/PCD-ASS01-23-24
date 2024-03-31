@@ -47,10 +47,10 @@ public class RoadSimView extends JFrame implements SimulationListener {
 
 	@Override
 	public void notifyStepDone(int t,List<AbstractCarAgent> agents, Environment env) {
-		var e = ((RoadsEnvironment) env);
+		RoadsEnvironment e = ((RoadsEnvironment) env);
 		panel.update(e.getRoads(), e.getAgentInfo(), e.getTrafficLights());
 	}
-	
+
 	
 	class RoadSimViewPanel extends JPanel {
 		
@@ -69,13 +69,13 @@ public class RoadSimView extends JFrame implements SimulationListener {
 			g2.clearRect(0,0,this.getWidth(),this.getHeight());
 			
 			if (roads != null) {
-				for (var r: roads) {
+				for (Road r: roads) {
 					g2.drawLine((int)r.getFrom().getX(), (int)r.getFrom().getY(), (int)r.getTo().getX(), (int)r.getTo().getY());
 				}
 			}
 			
 			if (sems != null) {
-				for (var s: sems) {
+				for (TrafficLight s: sems) {
 					if (s.isGreen()) {
 						g.setColor(new Color(0, 255, 0, 255));
 					} else if (s.isRed()) {
@@ -92,7 +92,7 @@ public class RoadSimView extends JFrame implements SimulationListener {
 			//g.setColor(new Color((int)(Math.random() * 256), (int)(Math.random() * 256), (int)(Math.random() * 256)));
 
 			if (cars != null) {
-				for (var c: cars) {
+				for (AbstractCarAgent c: cars) {
 					double pos = c.getPosition();
 					Road r = c.getRoad();
 					Vector2D dir = Vector2D.makeV2d(r.getFrom(), r.getTo()).getNormalized().mul(pos);

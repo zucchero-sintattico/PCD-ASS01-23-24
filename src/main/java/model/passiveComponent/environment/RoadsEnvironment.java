@@ -14,10 +14,8 @@ import model.passiveComponent.environment.trafficLight.TrafficLightInfo;
 import model.passiveComponent.environment.trafficLight.TrafficLightState;
 import utils.Point2D;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class RoadsEnvironment implements Environment{
     private static final int MIN_DIST_ALLOWED = 5;
@@ -96,28 +94,24 @@ public class RoadsEnvironment implements Environment{
     @Override
     public void doAction(String agentID, Action selectedAction) {
 
-        switch (selectedAction) {
-            case MoveForward mv: {
-                AbstractCarAgent info = registeredCars.get(agentID);
-                Road road = info.getRoad();
-                Optional<AbstractCarAgent> nearestCar = getNearestCarInFront(road, info.getPosition(), CAR_DETECTION_RANGE);
+        if (selectedAction instanceof MoveForward) {
+            MoveForward mv = (MoveForward) selectedAction;
+            AbstractCarAgent info = registeredCars.get(agentID);
+            Road road = info.getRoad();
+            Optional<AbstractCarAgent> nearestCar = getNearestCarInFront(road, info.getPosition(), CAR_DETECTION_RANGE);
 
-                if (!nearestCar.isEmpty()) {
-                    double dist = nearestCar.get().getPosition() - info.getPosition();
-                    if (dist > mv.getDistance() + MIN_DIST_ALLOWED) {
-                        info.updatePosition(info.getPosition() + mv.getDistance());
-                    }
-                } else {
+            if (nearestCar.isPresent()) {
+                double dist = nearestCar.get().getPosition() - info.getPosition();
+                if (dist > mv.getDistance() + MIN_DIST_ALLOWED) {
                     info.updatePosition(info.getPosition() + mv.getDistance());
                 }
-
-                if (info.getPosition() > road.getLen()) {
-                    info.updatePosition(0);
-                }
-                break;
+            } else {
+                info.updatePosition(info.getPosition() + mv.getDistance());
             }
-            default:
-                break;
+
+            if (info.getPosition() > road.getLen()) {
+                info.updatePosition(0);
+            }
         }
 
     }
@@ -130,7 +124,7 @@ public class RoadsEnvironment implements Environment{
     }
 
     public List<AbstractCarAgent> getAgentInfo(){
-        return this.registeredCars.entrySet().stream().map(el -> el.getValue()).toList();
+        return this.registeredCars.entrySet().stream().map(el -> el.getValue()).collect(Collectors.toList());
     }
 
     public List<Road> getRoads(){

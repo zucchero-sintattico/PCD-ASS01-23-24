@@ -18,19 +18,17 @@ public class ExtendedCarAgent extends AbstractCarAgent {
         super(agentID, environment, road, initialPosition, acceleration, deceleration, maxSpeed);
     }
 
-    public ExtendedCarAgent(String agentID, Environment environment, Road road, double initialPosition, int seed) {
-        super(agentID, environment, road, initialPosition,  seed);
-    }
+
 
     @Override
     protected void decide() {
         switch (state) {
-            case ExtendedCarAgentState.STOPPED:
+            case STOPPED:
                 if (!detectedNearCar()) {
                     state = ExtendedCarAgentState.ACCELERATING;
                 }
                 break;
-            case ExtendedCarAgentState.ACCELERATING:
+            case ACCELERATING:
                 if (detectedNearCar()) {
                     state = ExtendedCarAgentState.DECELERATING_BECAUSE_OF_A_CAR;
                 } else if (detectedRedOrOrgangeSemNear()) {
@@ -42,14 +40,14 @@ public class ExtendedCarAgent extends AbstractCarAgent {
                     }
                 }
                 break;
-            case ExtendedCarAgentState.MOVING_CONSTANT_SPEED:
+            case MOVING_CONSTANT_SPEED:
                 if (detectedNearCar()) {
                     state = ExtendedCarAgentState.DECELERATING_BECAUSE_OF_A_CAR;
                 } else if (detectedRedOrOrgangeSemNear()) {
                     state = ExtendedCarAgentState.DECELERATING_BECAUSE_OF_A_NOT_GREEN_SEM;
                 }
                 break;
-            case ExtendedCarAgentState.DECELERATING_BECAUSE_OF_A_CAR:
+            case DECELERATING_BECAUSE_OF_A_CAR:
                 this.currentSpeed -= deceleration * stepSize;
                 if (this.currentSpeed <= 0) {
                     state =  ExtendedCarAgentState.STOPPED;
@@ -58,7 +56,7 @@ public class ExtendedCarAgent extends AbstractCarAgent {
                     waitingTime = 0;
                 }
                 break;
-            case ExtendedCarAgentState.DECELERATING_BECAUSE_OF_A_NOT_GREEN_SEM:
+            case DECELERATING_BECAUSE_OF_A_NOT_GREEN_SEM:
                 this.currentSpeed -= deceleration * stepSize;
                 if (this.currentSpeed <= 0) {
                     state =  ExtendedCarAgentState.WAITING_FOR_GREEN_SEM;
@@ -66,13 +64,13 @@ public class ExtendedCarAgent extends AbstractCarAgent {
                     state = ExtendedCarAgentState.ACCELERATING;
                 }
                 break;
-            case ExtendedCarAgentState.WAIT_A_BIT:
+            case WAIT_A_BIT:
                 waitingTime += stepSize;
                 if (waitingTime > MAX_WAITING_TIME) {
                     state = ExtendedCarAgentState.ACCELERATING;
                 }
                 break;
-            case ExtendedCarAgentState.WAITING_FOR_GREEN_SEM:
+            case WAITING_FOR_GREEN_SEM:
                 if (detectedGreenSem()) {
                     state = ExtendedCarAgentState.ACCELERATING;
                 }
@@ -86,7 +84,7 @@ public class ExtendedCarAgent extends AbstractCarAgent {
 
     private boolean detectedNearCar() {
         Optional<AbstractCarAgent> car = currentPerception.getNearestCarInFront();
-        if (car.isEmpty()) {
+        if (!car.isPresent()) {
             return false;
         } else {
             double dist = car.get().getPosition() - currentPerception.getRoadPos();
@@ -96,7 +94,7 @@ public class ExtendedCarAgent extends AbstractCarAgent {
 
     private boolean detectedRedOrOrgangeSemNear() {
         Optional<TrafficLightInfo> sem = currentPerception.getNearestSem();
-        if (sem.isEmpty() || sem.get().getSem().isGreen()) {
+        if (!sem.isPresent() || sem.get().getSem().isGreen()) {
             return false;
         } else {
             double dist = sem.get().getRoadPos() - currentPerception.getRoadPos();
@@ -112,7 +110,7 @@ public class ExtendedCarAgent extends AbstractCarAgent {
 
     private boolean carFarEnough() {
         Optional<AbstractCarAgent> car = currentPerception.getNearestCarInFront();
-        if (car.isEmpty()) {
+        if (!car.isPresent()) {
             return true;
         } else {
             double dist = car.get().getPosition() - currentPerception.getRoadPos();

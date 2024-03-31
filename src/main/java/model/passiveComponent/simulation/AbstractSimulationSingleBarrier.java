@@ -60,7 +60,7 @@ public abstract class AbstractSimulationSingleBarrier implements Simulation {
         environment = createEnvironment();
         environment.setup(dt);
         agents = createAgents();
-        for (var agent : agents) {
+        for (AbstractCarAgent agent : agents) {
             agent.setup(dt);
         }
     }
@@ -141,7 +141,7 @@ public abstract class AbstractSimulationSingleBarrier implements Simulation {
 
     // todo refactor
     private void notifyReset(int t0, List<AbstractCarAgent> agents, Environment env) {
-        for (var l : listeners) {
+        for (SimulationListener l : listeners) {
             l.notifyInit(t0, agents, env);
         }
     }
@@ -152,7 +152,7 @@ public abstract class AbstractSimulationSingleBarrier implements Simulation {
     }
 
     private void notifyNewStep(int t, List<AbstractCarAgent> agents, Environment env) {
-        for (var l : listeners) {
+        for (SimulationListener l : listeners) {
             l.notifyStepDone(t, agents, env);
         }
     }

@@ -63,7 +63,7 @@ public abstract class AbstractSimulation implements Simulation {
         environment = createEnvironment();
         environment.setup(dt);
         agents = createAgents();
-        for (var agent : agents) {
+        for (AbstractCarAgent agent : agents) {
             agent.setup(dt);
         }
     }
@@ -148,7 +148,7 @@ public abstract class AbstractSimulation implements Simulation {
 
     // todo refactor when merge
     private void notifyReset(int t0, List<AbstractCarAgent> agents, Environment env) {
-        for (var l : listeners) {
+        for (SimulationListener l : listeners) {
             l.notifyInit(t0, agents, env);
         }
     }
@@ -159,19 +159,19 @@ public abstract class AbstractSimulation implements Simulation {
     }
 
     private void notifyNewStep(int t, List<AbstractCarAgent> agents, Environment env) {
-        for (var l : listeners) {
+        for (SimulationListener l : listeners) {
             l.notifyStepDone(t, agents, env);
         }
     }
 
     private void notifyNewStat(double averageSpeed) {
-        for (var l : listeners) {
+        for (SimulationListener l : listeners) {
             l.notifyStat(averageSpeed);
         }
     }
 
     private void notifySimulationeDone() {
-        for (var l : listeners) {
+        for (SimulationListener l : listeners) {
             l.notifySimulationEnded();
         }
     }
@@ -181,7 +181,7 @@ public abstract class AbstractSimulation implements Simulation {
 
         maxSpeed = -1;
         minSpeed = Double.MAX_VALUE;
-        for (var agent : agents) {
+        for (AbstractCarAgent agent : agents) {
             AbstractCarAgent car = agent;
             double currSpeed = car.getCurrentSpeed();
             avSpeed += currSpeed;
