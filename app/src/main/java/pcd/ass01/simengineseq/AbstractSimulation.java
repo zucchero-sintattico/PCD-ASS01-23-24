@@ -45,10 +45,13 @@ public abstract class AbstractSimulation {
 	private int t;
 	private long timePerStep;
 
+	private SimulationState state;
+
 	protected AbstractSimulation() {
 		agents = new ArrayList<AbstractAgent>();
 		listeners = new ArrayList<SimulationListener>();
 		toBeInSyncWithWallTime = false;
+		this.state = new SimulationState();
 	}
 	
 	/**
@@ -97,7 +100,7 @@ public abstract class AbstractSimulation {
 	public void run() {
 
 		
-		while (nSteps < numSteps) {
+		if (nSteps < numSteps) {
 
 			currentWallTime = System.currentTimeMillis();
 		
@@ -136,9 +139,12 @@ public abstract class AbstractSimulation {
 //			barrier.reset();
 
 		}	
-		
-		endWallTime = System.currentTimeMillis();
-		this.averageTimePerStep = timePerStep / numSteps;
+		if(nSteps == numSteps){
+			endWallTime = System.currentTimeMillis();
+			this.averageTimePerStep = timePerStep / numSteps;
+			this.state.stopSimulation();
+		}
+
 		
 	}
 	
@@ -199,5 +205,9 @@ public abstract class AbstractSimulation {
 				Thread.sleep(delay - wallTimeDT);
 			}
 		} catch (Exception ex) {}		
+	}
+
+	public SimulationState getState() {
+		return this.state;
 	}
 }
