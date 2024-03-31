@@ -6,9 +6,9 @@ public class SimulationWorker extends Thread {
 
     private final List<Runnable> tasks;
     private final int step;
-    private final ResettableBarrier barrier, barrier2;
+    private final Barrier barrier, barrier2;
 
-    public SimulationWorker(List<Runnable> tasks, int step, ResettableBarrier barrier, ResettableBarrier barrier2){
+    public SimulationWorker(List<Runnable> tasks, int step, Barrier barrier, Barrier barrier2){
         this.tasks = tasks;
         this.step = step;
         this.barrier = barrier;

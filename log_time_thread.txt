@@ -10,4 +10,12 @@
 1	33893
 1	34056
 1	33452
------------ remove extra simulation
+----------- remove extra simulations
+
+1	34658
+1	33915
+1	33437
+1	34172
+1	33378
+1	35284
+----------- use cyclic barrier

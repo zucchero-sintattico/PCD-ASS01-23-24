@@ -39,7 +39,7 @@ public abstract class AbstractSimulation {
 	private long averageTimePerStep;
 	private Random r = new Random();
 
-	private ResettableBarrier barrier1, barrier2;
+	private Barrier barrier1, barrier2;
 
 	protected AbstractSimulation() {
 		agents = new ArrayList<AbstractAgent>();
@@ -61,8 +61,8 @@ public abstract class AbstractSimulation {
 	 * @param numSteps
 	 */
 	public void run(int numSteps, int numOfThread) {
-		barrier1 = new ResettableBarrierImpl(numOfThread+1);
-		barrier2 = new ResettableBarrierImpl(numOfThread+1);
+		barrier1 = new CyclicBarrier(numOfThread+1);
+		barrier2 = new CyclicBarrier(numOfThread+1);
 		startWallTime = System.currentTimeMillis();
 
 		List<Thread> carsList = new ArrayList<Thread>();

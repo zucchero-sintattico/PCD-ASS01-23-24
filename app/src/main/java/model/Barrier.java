@@ -4,5 +4,4 @@ public interface Barrier {
 
     void hitAndWaitAll() throws InterruptedException;
 
-    void reset();
 }

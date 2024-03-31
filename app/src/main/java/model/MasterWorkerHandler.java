@@ -1,5 +1,6 @@
 package model;
 
+import org.checkerframework.checker.units.qual.C;
 import pcd.ass01.simengineseq.AbstractAgent;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class MasterWorkerHandler {
 
 
 
-    public MasterWorkerHandler(int numOfThread, List<AbstractAgent> listOFAgent, int numOfStep, ResettableBarrier barrier, ResettableBarrier barrier2){
+    public MasterWorkerHandler(int numOfThread, List<AbstractAgent> listOFAgent, int numOfStep, Barrier barrier, Barrier barrier2){
 
         this.listOFAgent = new ArrayList<>(listOFAgent);
 
