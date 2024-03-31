@@ -6,13 +6,12 @@ public class SimulationWorker extends Thread {
 
     private final List<Runnable> tasks;
     private final int step;
-    private final Barrier barrier, barrier2;
+    private final Barrier barrier;
 
-    public SimulationWorker(List<Runnable> tasks, int step, Barrier barrier, Barrier barrier2){
+    public SimulationWorker(List<Runnable> tasks, int step, Barrier barrier){
         this.tasks = tasks;
         this.step = step;
         this.barrier = barrier;
-        this.barrier2 = barrier2;
     }
 
     @Override
@@ -21,7 +20,6 @@ public class SimulationWorker extends Thread {
             this.tasks.forEach(Runnable::run);
             try {
                 this.barrier.hitAndWaitAll();
-                this.barrier2.hitAndWaitAll();
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

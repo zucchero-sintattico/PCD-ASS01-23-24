@@ -67,8 +67,7 @@ public abstract class AbstractSimulation {
 	}
 
 	private void beforeRun(int numSteps, int numOfThread) {
-		barrier1 = new CyclicBarrier(numOfThread+1);
-		barrier2 = new CyclicBarrier(numOfThread+1);
+		barrier1 = new CyclicBarrier(numOfThread+1, () -> env.step(dt), () -> extracted());
 		startWallTime = System.currentTimeMillis();
 
 		List<Thread> carsList = new ArrayList<Thread>();
@@ -83,7 +82,7 @@ public abstract class AbstractSimulation {
 		}
 
 
-		new MasterWorkerHandler(numOfThread, agents, numSteps, barrier1, barrier2);
+		new MasterWorkerHandler(numOfThread, agents, numSteps, barrier1);
 
 		this.notifyReset(t, agents, env);
 		this.numSteps = numSteps;
@@ -102,13 +101,13 @@ public abstract class AbstractSimulation {
 		
 		if (nSteps < numSteps) {
 
-			currentWallTime = System.currentTimeMillis();
+
 		
 			/* make a step */
 			
-			env.step(dt);
+//			env.step(dt);
 
-			System.out.println("Step: " + nSteps);
+
 
 			try {
 				barrier1.hitAndWaitAll();
@@ -116,26 +115,8 @@ public abstract class AbstractSimulation {
 				throw new RuntimeException(e);
 			}
 //			while(!barrier.isResettable()){}
-			for (var a: agents) {
-				a.doAction();
-			}
 
-			
-			t += dt;
-			
-			notifyNewStep(t, agents, env);
 
-			nSteps++;			
-			timePerStep += System.currentTimeMillis() - currentWallTime;
-			
-			if (toBeInSyncWithWallTime) {
-				syncWithWallTime();
-			}
-			try {
-				barrier2.hitAndWaitAll();
-			} catch (InterruptedException e) {
-				throw new RuntimeException(e);
-			}
 //			barrier.reset();
 
 		}	
@@ -147,7 +128,26 @@ public abstract class AbstractSimulation {
 
 		
 	}
-	
+
+	private void extracted() {
+
+		System.out.println("Step: " + nSteps);
+		currentWallTime = System.currentTimeMillis();
+		for (var a: agents) {
+			a.doAction();
+		}
+		t += dt;
+
+		notifyNewStep(t, agents, env);
+
+		nSteps++;
+		timePerStep += System.currentTimeMillis() - currentWallTime;
+
+		if (toBeInSyncWithWallTime) {
+			syncWithWallTime();
+		}
+	}
+
 	public long getSimulationDuration() {
 		return (endWallTime - startWallTime);
 	}

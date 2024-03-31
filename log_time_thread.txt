@@ -35,3 +35,11 @@
 1	32446
 
 ----------- add flag to simulation runner
+1	35486
+1	35698
+1	35311
+1	34006
+1	34947
+1	34199
+
+----------- use cyclic barrier with pre and post protocol
