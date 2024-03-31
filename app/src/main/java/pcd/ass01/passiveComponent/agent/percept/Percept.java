@@ -1,4 +1,4 @@
-package pcd.ass01.passiveComponent.simulation.agent.perception;
+package pcd.ass01.passiveComponent.agent.percept;
 
 /**
  * Base type for defining agent percepts

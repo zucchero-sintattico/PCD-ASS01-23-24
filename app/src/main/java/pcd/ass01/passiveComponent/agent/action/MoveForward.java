@@ -1,6 +1,4 @@
-package pcd.ass01.passiveComponent.simulation.agent.action;
-
-import pcd.ass01.passiveComponent.simulation.agent.action.Action;
+package pcd.ass01.passiveComponent.agent.action;
 
 /**
  * Car agent move forward action

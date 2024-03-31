@@ -1,7 +1,7 @@
 package pcd.ass01.passiveComponent.simulation.listeners;
 
-import pcd.ass01.simengineseq.AbstractAgent;
-import pcd.ass01.simengineseq.AbstractEnvironment;
+import pcd.ass01.passiveComponent.agent.AbstractAgent;
+import pcd.ass01.simtrafficbase.AbstractEnvironment;
 
 import java.util.List;
 

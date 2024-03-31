@@ -3,9 +3,9 @@ package pcd.ass01.simtrafficbase;
 import java.util.Optional;
 import java.util.Random;
 
-import pcd.ass01.passiveComponent.simulation.agent.action.Action;
-import pcd.ass01.passiveComponent.simulation.agent.perception.CarPercept;
-import pcd.ass01.simengineseq.*;
+import pcd.ass01.passiveComponent.agent.AbstractAgent;
+import pcd.ass01.passiveComponent.agent.action.Action;
+import pcd.ass01.passiveComponent.agent.percept.CarPercept;
 
 /**
  * 

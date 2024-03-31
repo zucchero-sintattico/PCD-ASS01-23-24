@@ -5,11 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-import pcd.ass01.passiveComponent.simulation.agent.action.MoveForward;
-import pcd.ass01.passiveComponent.simulation.agent.perception.CarPercept;
-import pcd.ass01.simengineseq.AbstractEnvironment;
-import pcd.ass01.passiveComponent.simulation.agent.action.Action;
-import pcd.ass01.passiveComponent.simulation.agent.perception.Percept;
+import pcd.ass01.passiveComponent.agent.action.MoveForward;
+import pcd.ass01.passiveComponent.agent.percept.CarPercept;
+import pcd.ass01.passiveComponent.agent.action.Action;
+import pcd.ass01.passiveComponent.agent.percept.Percept;
 
 public class RoadsEnv extends AbstractEnvironment {
 		

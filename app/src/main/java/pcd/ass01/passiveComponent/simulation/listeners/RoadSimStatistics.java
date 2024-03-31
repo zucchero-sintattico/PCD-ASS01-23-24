@@ -3,9 +3,8 @@ package pcd.ass01.passiveComponent.simulation.listeners;
 import java.io.FileWriter;
 import java.util.List;
 
-import pcd.ass01.simengineseq.AbstractAgent;
-import pcd.ass01.simengineseq.AbstractEnvironment;
-import pcd.ass01.passiveComponent.simulation.listeners.SimulationListener;
+import pcd.ass01.passiveComponent.agent.AbstractAgent;
+import pcd.ass01.simtrafficbase.AbstractEnvironment;
 import pcd.ass01.simtrafficbase.*;
 
 /**

@@ -1,7 +1,7 @@
-package pcd.ass01.simengineseq;
+package pcd.ass01.simtrafficbase;
 
-import pcd.ass01.passiveComponent.simulation.agent.action.Action;
-import pcd.ass01.passiveComponent.simulation.agent.perception.Percept;
+import pcd.ass01.passiveComponent.agent.action.Action;
+import pcd.ass01.passiveComponent.agent.percept.Percept;
 
 import java.util.Optional;
 

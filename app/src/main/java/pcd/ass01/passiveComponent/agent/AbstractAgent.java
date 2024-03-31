@@ -1,6 +1,6 @@
-package pcd.ass01.simengineseq;
+package pcd.ass01.passiveComponent.agent;
 
-import java.util.concurrent.Semaphore;
+import pcd.ass01.simtrafficbase.AbstractEnvironment;
 
 /**
  * 

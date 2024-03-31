@@ -1,4 +1,4 @@
-package pcd.ass01.passiveComponent.simulation.agent.action;
+package pcd.ass01.passiveComponent.agent.action;
 
 /**
  * Base type for defining actions to be executed on the environment

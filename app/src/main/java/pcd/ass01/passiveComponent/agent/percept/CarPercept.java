@@ -1,8 +1,7 @@
-package pcd.ass01.passiveComponent.simulation.agent.perception;
+package pcd.ass01.passiveComponent.agent.percept;
 
 import java.util.Optional;
 
-import pcd.ass01.passiveComponent.simulation.agent.perception.Percept;
 import pcd.ass01.simtrafficbase.CarAgentInfo;
 import pcd.ass01.simtrafficbase.TrafficLightInfo;
 

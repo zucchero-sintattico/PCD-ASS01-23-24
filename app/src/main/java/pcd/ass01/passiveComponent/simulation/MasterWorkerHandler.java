@@ -2,7 +2,7 @@ package pcd.ass01.passiveComponent.simulation;
 
 import pcd.ass01.monitor.barrier.Barrier;
 import pcd.ass01.activeComponent.SimulationWorker;
-import pcd.ass01.simengineseq.AbstractAgent;
+import pcd.ass01.passiveComponent.agent.AbstractAgent;
 
 import java.util.ArrayList;
 import java.util.List;
