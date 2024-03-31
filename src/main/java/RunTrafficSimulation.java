@@ -1,30 +1,53 @@
 import model.activeComponent.SimulationRunner;
+import model.monitor.barrier.CyclicBarrier;
+import model.passiveComponent.simulation.examples.TrafficSimulationSingleRoadTwoCars;
+import model.passiveComponent.simulation.examples.TrafficSimulationSingleRoadWithTrafficLightTwoCars;
 import model.passiveComponent.simulation.listeners.RoadSimStatistics;
-import view.RoadSimView;
 import model.passiveComponent.simulation.examples.TrafficSimulationWithCrossRoads;
 
-/**
- * 
- * Main class to create and run a simulation
- * 
- */
+
+
 public class RunTrafficSimulation {
 
+	private static class SimulationClass extends Thread{
+
+		int a;
+		CyclicBarrier barrier;
+
+		private SimulationClass(int a, CyclicBarrier barrier) {
+			super();
+			this.a = a;
+			this.barrier = barrier;
+		}
+
+		@Override
+		public void run() {
+			for (int i = 0; i < this.a; i++) {
+                try {
+                    barrier.hitAndWaitAll();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+		}
+	}
+
+
 	public static void main(String[] args) throws InterruptedException {
-		// var simulation = new TrafficSimulationSingleRoadTwoCars();
-		// var simulation = new TrafficSimulationSingleRoadSeveralCars();
-		// var simulation = new TrafficSimulationSingleRoadWithTrafficLightTwoCars();
-		TrafficSimulationWithCrossRoads simulation = new TrafficSimulationWithCrossRoads();
-		simulation.setup(1000, 20);
-		
-		RoadSimStatistics stat = new RoadSimStatistics();
-		RoadSimView view = new RoadSimView();
-		view.display();
-		
-		simulation.addSimulationListener(stat);
-		simulation.addSimulationListener(view);
-		Thread t = new SimulationRunner(simulation);
-		t.start();
-		t.join();
+		CyclicBarrier barrier = new CyclicBarrier(2);
+		int a = 2;
+
+		Thread t1 = new SimulationClass(a, barrier);
+		t1.start();
+
+		for (int i = 0; i < a; i++) {
+			try {
+				barrier.hitAndWaitAll();
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
+		}
+
+
 	}
 }

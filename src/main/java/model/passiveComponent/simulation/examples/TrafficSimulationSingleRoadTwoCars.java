@@ -33,7 +33,7 @@ public class TrafficSimulationSingleRoadTwoCars extends AbstractSimulation {
 		agents.add(car2);
 
 		/* sync with wall-time: 25 steps per sec */
-		this.syncWithTime(25);
+		//this.syncWithTime(25);
 		return agents;
 	}
 
