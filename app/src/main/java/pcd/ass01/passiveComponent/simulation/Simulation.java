@@ -1,7 +1,7 @@
 package pcd.ass01.passiveComponent.simulation;
 
 
-import model.SimulationState;
+import pcd.ass01.monitor.state.SimulationState;
 import pcd.ass01.passiveComponent.simulation.listeners.SimulationListener;
 
 public interface Simulation {

@@ -1,4 +1,4 @@
-package model;
+package pcd.ass01.monitor.barrier;
 
 public class CyclicBarrier implements Barrier {
 

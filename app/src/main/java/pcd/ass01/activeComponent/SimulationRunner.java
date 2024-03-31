@@ -1,5 +1,6 @@
-package model;
+package pcd.ass01.activeComponent;
 
+import pcd.ass01.monitor.state.SimulationState;
 import pcd.ass01.passiveComponent.simulation.AbstractSimulation;
 
 public class SimulationRunner extends Thread {

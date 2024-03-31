@@ -1,4 +1,6 @@
-package model;
+package pcd.ass01.activeComponent;
+
+import pcd.ass01.monitor.barrier.Barrier;
 
 import java.util.List;
 

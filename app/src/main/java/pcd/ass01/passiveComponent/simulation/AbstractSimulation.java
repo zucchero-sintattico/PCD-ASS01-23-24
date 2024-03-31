@@ -1,6 +1,8 @@
 package pcd.ass01.passiveComponent.simulation;
 
-import model.*;
+import pcd.ass01.monitor.barrier.Barrier;
+import pcd.ass01.monitor.barrier.CyclicBarrier;
+import pcd.ass01.monitor.state.SimulationState;
 import pcd.ass01.simengineseq.AbstractAgent;
 import pcd.ass01.simengineseq.AbstractEnvironment;
 import pcd.ass01.passiveComponent.simulation.listeners.SimulationListener;

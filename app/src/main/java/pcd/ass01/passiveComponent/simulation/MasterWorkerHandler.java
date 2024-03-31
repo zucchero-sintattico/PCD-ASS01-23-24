@@ -1,6 +1,7 @@
-package model;
+package pcd.ass01.passiveComponent.simulation;
 
-import org.checkerframework.checker.units.qual.C;
+import pcd.ass01.monitor.barrier.Barrier;
+import pcd.ass01.activeComponent.SimulationWorker;
 import pcd.ass01.simengineseq.AbstractAgent;
 
 import java.util.ArrayList;
