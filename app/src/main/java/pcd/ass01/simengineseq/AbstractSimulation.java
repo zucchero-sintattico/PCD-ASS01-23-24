@@ -40,6 +40,10 @@ public abstract class AbstractSimulation {
 	private Random r = new Random();
 
 	private Barrier barrier1, barrier2;
+	private int nSteps;
+	private int numSteps;
+	private int t;
+	private long timePerStep;
 
 	protected AbstractSimulation() {
 		agents = new ArrayList<AbstractAgent>();
@@ -52,15 +56,14 @@ public abstract class AbstractSimulation {
 	 * Method used to configure the simulation, specifying env and agents
 	 * 
 	 */
-	protected abstract void setup();
 	
-	/**
-	 * Method running the simulation for a number of steps,
-	 * using a sequential approach
-	 * 
-	 * @param numSteps
-	 */
-	public void run(int numSteps, int numOfThread) {
+	protected abstract void setupComponent();
+	public void setup(int numSteps, int numOfThread){
+		setupComponent();
+		beforeRun(numSteps, numOfThread);
+	}
+
+	private void beforeRun(int numSteps, int numOfThread) {
 		barrier1 = new CyclicBarrier(numOfThread+1);
 		barrier2 = new CyclicBarrier(numOfThread+1);
 		startWallTime = System.currentTimeMillis();
@@ -68,8 +71,8 @@ public abstract class AbstractSimulation {
 		List<Thread> carsList = new ArrayList<Thread>();
 
 
-        /* initialize the env and the agents inside */
-		int t = t0;
+		/* initialize the env and the agents inside */
+		t = t0;
 
 		env.init();
 		for (var a: agents) {
@@ -80,9 +83,19 @@ public abstract class AbstractSimulation {
 		new MasterWorkerHandler(numOfThread, agents, numSteps, barrier1, barrier2);
 
 		this.notifyReset(t, agents, env);
-		
-		long timePerStep = 0;
-		int nSteps = 0;
+		this.numSteps = numSteps;
+		timePerStep = 0;
+		nSteps = 0;
+	}
+
+	/**
+	 * Method running the simulation for a number of steps,
+	 * using a sequential approach
+	 * 
+	 * @param
+	 */
+	public void run() {
+
 		
 		while (nSteps < numSteps) {
 

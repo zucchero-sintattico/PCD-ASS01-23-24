@@ -16,7 +16,7 @@ public class RunTrafficSimulationMassiveTest {
 		numOfThreads.forEach(numOfThread -> {
 			System.out.println("Thread: " + numOfThread);
 			var simulation = new TrafficSimulationSingleRoadMassiveNumberOfCars(numCars);
-			simulation.setup();
+			simulation.setup(nSteps, numOfThread);
 
 			log("Running the simulation: " + numCars + " cars, for " + nSteps + " steps ...");
 
@@ -24,7 +24,7 @@ public class RunTrafficSimulationMassiveTest {
 
 			simulation.addSimulationListener(stat);
 
-			simulation.run(nSteps, numOfThread);
+			simulation.run();
 
 			long d = simulation.getSimulationDuration();
 			log("Completed in " + d + " ms - average time per step: " + simulation.getAverageTimePerCycle() + " ms");

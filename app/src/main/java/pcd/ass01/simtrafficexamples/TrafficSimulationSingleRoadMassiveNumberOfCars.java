@@ -16,7 +16,7 @@ public class TrafficSimulationSingleRoadMassiveNumberOfCars extends AbstractSimu
 		this.numCars = numCars;
 	}
 	
-	public void setup() {
+	protected void setupComponent() {
 		this.setupTimings(0, 1);
 
 		RoadsEnv env = new RoadsEnv();
