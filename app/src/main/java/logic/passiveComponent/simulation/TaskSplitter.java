@@ -8,10 +8,10 @@ import logic.passiveComponent.agent.task.ParallelTask;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MasterWorkerHandler {
+public class TaskSplitter {
 
-	public MasterWorkerHandler(int numOfThread, List<AbstractCarAgent> listOFAgent, int numOfStep,
-	                           CyclicBarrier barrier) {
+	public static void splitTasks(int numOfThread, List<AbstractCarAgent> listOFAgent, int numOfStep,
+						CyclicBarrier barrier) {
 
 
 		List<ParallelTask> listOfParallelTasks = new ArrayList<>();

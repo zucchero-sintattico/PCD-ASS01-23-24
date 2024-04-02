@@ -49,7 +49,7 @@ public abstract class AbstractSimulation implements Simulation {
 		this.environment.step();
 		int effectiveNumOfThread = Math.min(numOfThread, agents.size());
 		this.barrier = new CyclicBarrier(effectiveNumOfThread + 1, this::postProcessing);
-		new MasterWorkerHandler(effectiveNumOfThread,
+		TaskSplitter.splitTasks(effectiveNumOfThread,
 				agents, numSteps, barrier);
 		this.notifyReset(this.t0, this.agents, this.environment);
 	}
