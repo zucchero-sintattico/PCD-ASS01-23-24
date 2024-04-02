@@ -48,7 +48,7 @@ public abstract class AbstractSimulation implements Simulation {
 		this.startWallTime = System.currentTimeMillis();
 		this.environment.step();
 		int effectiveNumOfThread = Math.min(numOfThread, agents.size());
-		this.barrier = new CyclicBarrier(effectiveNumOfThread + 1, this::postProcessing);
+		this.barrier = new CyclicBarrier(effectiveNumOfThread, this::postProcessing);
 		TaskSplitter.splitTasks(effectiveNumOfThread,
 				agents, numSteps, barrier);
 		this.notifyReset(this.t0, this.agents, this.environment);
@@ -78,25 +78,17 @@ public abstract class AbstractSimulation implements Simulation {
 
 	@Override
 	public void doStep() {
-		if (this.numStepDone < this.numSteps) {
-
-			try {
-				this.barrier.hitAndWaitAll();
-			} catch (InterruptedException e) {
-				throw new RuntimeException(e);
-			}
-
-		}
-		if (this.numStepDone == this.numSteps) {
-			this.endWallTime = System.currentTimeMillis();
-			this.averageTimePerStep = cumulativeTimePerStep / numSteps;
-			this.state.stopSimulation();
-		}
+		//delegated to cyclic barrier
 	}
 	private void postProcessing(){
 		extracted();
 		if(this.numStepDone != this.numSteps){
 			environment.step();
+		}
+		if (this.numStepDone == this.numSteps) {
+			this.endWallTime = System.currentTimeMillis();
+			this.averageTimePerStep = cumulativeTimePerStep / numSteps;
+			this.state.stopSimulation();
 		}
 	}
 	private void extracted() {
