@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class RoadSimView extends JFrame implements SimulationListener {
+public class RoadSimView extends JFrame implements SimulationListener, View {
 
 	private RoadSimViewPanel panel;
 	private static final int CAR_DRAW_SIZE = 10;
@@ -33,7 +33,8 @@ public class RoadSimView extends JFrame implements SimulationListener {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			
 	}
-	
+
+	@Override
 	public void display() {
 		SwingUtilities.invokeLater(() -> {
 			this.setVisible(true);

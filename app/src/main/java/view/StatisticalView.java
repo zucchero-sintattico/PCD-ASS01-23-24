@@ -28,7 +28,7 @@ import logic.passiveComponent.environment.Environment;
 import logic.passiveComponent.simulation.SimulationType;
 import logic.passiveComponent.simulation.listeners.SimulationListener;
 
-public class StatisticalView extends JFrame implements ActionListener, SimulationListener {
+public class StatisticalView extends JFrame implements ActionListener, SimulationListener, View {
     private final static int DEFAULT_SIZE = 1000;
     private JLabel labelNumberOfSteps;
     private JTextField fieldNumberOfSteps;
@@ -181,28 +181,30 @@ public class StatisticalView extends JFrame implements ActionListener, Simulatio
         this.buttonContainer.add(this.buttonReset);
     }
 
+    @Override
     public void display() {
         SwingUtilities.invokeLater(() -> this.setVisible(true));
     }
 
-    public void updateView(String message) {
+    private void updateView(String message) {
         this.areaConsoleLog.append(message + "\n");
         this.areaConsoleLog.setCaretPosition(this.areaConsoleLog.getDocument().getLength());
     }
 
-    public int getNumberOfSteps() {
+
+    private int getNumberOfSteps() {
         return Integer.valueOf(this.fieldNumberOfSteps.getText());
     }
 
-    public int getNumberOfThreads() {
+    private int getNumberOfThreads() {
         return Integer.valueOf(this.fieldNumberOfThreads.getText());
     }
 
-    public void clearTextArea() {
+    private void clearTextArea() {
         this.areaConsoleLog.setText("");
     }
 
-    public void populateComboBox() {
+    private void populateComboBox() {
         this.comboBox.addItem(SimulationType.SINGLE_ROAD_TWO_CAR);
         this.comboBox.addItem(SimulationType.SINGLE_ROAD_SEVERAL_CARS);
         this.comboBox.addItem(SimulationType.SINGLE_ROAD_WITH_TRAFFIC_TWO_CAR);
@@ -210,11 +212,11 @@ public class StatisticalView extends JFrame implements ActionListener, Simulatio
         this.comboBox.addItem(SimulationType.MASSIVE_SIMULATION);
     }
 
-    public SimulationType getSimulationType() {
+    private SimulationType getSimulationType() {
         return (SimulationType) this.comboBox.getSelectedItem();
     }
 
-    public boolean getShowViewFlag() {
+    private boolean getShowViewFlag() {
         return this.checkBox.isSelected();
     }
 
